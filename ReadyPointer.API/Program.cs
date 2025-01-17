@@ -1,11 +1,14 @@
 using Microsoft.OpenApi.Models;
 using ReadyPointer.API.Config;
+using ReadyPointer.API.IServices;
+using ReadyPointer.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHttpClient();
 builder.Services.Configure<EndpointsConfig>(builder.Configuration.GetSection("EndpointsConfig"));
-
+builder.Services.AddScoped<IProductService, ProductService>();
 
 
 builder.Services.AddControllers();
